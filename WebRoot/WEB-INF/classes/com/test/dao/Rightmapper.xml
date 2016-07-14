@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.Rightmapper">
+<!-- <select id="fundByName" parameterType="String" resultType="int">
+      select count(*) from t_user where LoginName = #{LoginName}
+</select> 
+<insert id="insertUser" parameterType="com.test.model.Users" >
+   insert into t_user(LoginName,passWord) values(#{LoginName},#{passWord})
+</insert> -->
+
+<select id="findUrl"  resultType="com.test.model.Right">
+      select * from t_rights 
+</select>
+
+<select id="findByRote"  parameterType="int" resultType="com.test.model.Right">
+      select * from t_rights where id=#{i}
+</select>
+
+<select id="findRoteList"  resultType="com.test.model.Right">
+select * from t_rights where right_farher_id is null
+</select>
+
+<select id="findRoteListByfatherId"  parameterType="int" resultType="com.test.model.Right">
+select * from t_rights where right_farher_id =#{id}
+</select>
+
+</mapper>
