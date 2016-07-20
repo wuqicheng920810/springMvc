@@ -24,10 +24,10 @@
 
 </head>
 <frameset rows="22%,*" cols="*" frameborder="yes" border="1" framespacing="1">
-	<frame src="usersController/top.do" />
+	<frame src="jumpAction/top.do" />
 	<frameset cols="15%,*" frameborder="yes" framespacing="1">
-		<frame id="letf_f" name="letf_f" src="usersController/left.do" target="right_f"></frame>
-		<frame id="right_f" name="right_f" src="usersController/top.do"></frame>
+		<frame id="letf_f" name="letf_f" src="jumpAction/left.do" target="right_f"></frame>
+		<frame id="right_f" name="right_f" src="jumpAction/top.do"></frame>
     </frameset>
 </frameset>
 <body>

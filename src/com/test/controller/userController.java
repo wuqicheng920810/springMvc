@@ -1,4 +1,4 @@
-package com.test.controller;
+/*package com.test.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -32,42 +32,42 @@ public class userController {
 	@Resource
 	private UserRigthRotemapper userrightMapper;
    
-	/**
+	*//**
 	 * 添加用户
 	 * 注册方法提交
 	 * @param u
 	 * @return
-	 */
+	 *//*
    @RequestMapping("inserUser")
    public  String insertUser(Users u){
 	   userMapper.insertUser(u);
 	   return "master/login";
    }
    
-   /**
+   *//**
     * 跳转登入方法
     * @return
-    */
+    *//*
    @RequestMapping("login")
    public String to_login(){
 	   return "master/login";
    }
-   /**
+   *//**
     * 跳转注册方法
     * @return
-    */
+    *//*
    @RequestMapping("to_register")
    public String to_register(){
 	   return "master/register";
    }
    
-   /**
+   *//**
     * 判断注册时候用户名是否存在
     * @param request
     * @param response
     * @param u
     * @throws Exception
-    */
+    *//*
    @RequestMapping("test_name")
    @ResponseBody
    public void QueryByname(HttpServletRequest request, HttpServletResponse response,Users u) throws Exception{
@@ -80,14 +80,14 @@ public class userController {
 	   response.getWriter().print(s);
    }
  
-   /**
+   *//**
     * 登入方法
     * @param request
     * @param response
     * @param u
     * @return
  * @throws IOException 
-    */
+    *//*
    @RequestMapping("userLogin")
    @ResponseBody
    public void userLogin(HttpServletRequest request, HttpServletResponse response,Users u) throws IOException{
@@ -121,21 +121,21 @@ public class userController {
 	 }
    
    
-   /**
+   *//**
     * 主页面构造，头部
     * @return
-    */
+    *//*
    @RequestMapping("top")
    public String top(){
 	   return "master/top";
    }
    
-   /**
+   *//**
     * 主页面构造左边菜单栏
     * @param request
     * @param response
     * @return
-    */
+    *//*
    @RequestMapping("left")
    public String left(HttpServletRequest request, HttpServletResponse response){
 	   Users u= (Users) request.getSession().getAttribute("users");
@@ -150,13 +150,14 @@ public class userController {
 	   return "master/left";
    }
    
-   /**
+   *//**
     * 主页面构成
     * 右边主要显示，操作栏
     * @return
-    */
+    *//*
    @RequestMapping("right")
    public String right(){
 	   return "master/right";
    }
 }
+*/

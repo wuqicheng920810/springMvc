@@ -78,12 +78,12 @@
 		<!-- 自动搜索@Controller标注的类 -->
 		<!-- Activates scanning of @Autowired -->
 	<context:annotation-config />
-	<context:component-scan base-package="com.test.*" />
+	<context:component-scan base-package="com.myorder.action" />
 	    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>  
 
 <!--mapper扫描器  -->
    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-     <property name="basePackage" value="com.test.dao"></property>
+     <property name="basePackage" value="com.myorder.dao"></property>
      <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
    </bean>
 

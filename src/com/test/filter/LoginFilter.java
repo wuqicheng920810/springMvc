@@ -18,11 +18,6 @@ import com.test.model.Users;
 
 public class LoginFilter implements HandlerInterceptor {
 	
-	@Resource
-	private Rightmapper rightMapper;
-	
-	@Resource
-	private UserRigthRotemapper userrightMapper;
 
 	@Override
 	public void afterCompletion(HttpServletRequest arg0,
@@ -43,7 +38,7 @@ public class LoginFilter implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
 			Object arg2) throws Exception {
 		// TODO Auto-generated method stub
-		HttpSession session=arg0.getSession();
+		/*HttpSession session=arg0.getSession();
 		Users u=(Users) session.getAttribute("users");
 		System.out.println( arg0.getRequestURI());
 		String url= arg0.getRequestURI();
@@ -89,7 +84,7 @@ public class LoginFilter implements HandlerInterceptor {
 			
 			arg0.getRequestDispatcher("master/login").forward(arg0, arg1);
 			}
-		}
+		}*/
      return true;
 	}
 

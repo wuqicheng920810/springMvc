@@ -35,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body >
       <div class="mainDiv" >
           <div class="log_Win">
-             <p><input class="input_t" type="text"  id="userName" name="userName"/></p>
-             <p><input class="input_t" style="margin-top: 10px" type="password"  id="userPwd" name="userPwd"/> <a href="usersController/to_register.do">注册</a></p>
+             <p><input class="input_t" type="text"  id="loginname" name="loginname"/></p>
+             <p><input class="input_t" style="margin-top: 10px" type="password"  id="password" name="password"/> <a href="usersController/to_register.do">注册</a></p>
              <p><input class="button_1"  name="login_but" type="button"  value="登入"/></p>
           </div>
       </div>
@@ -45,13 +45,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
       $(function(){
            $(":button").click(function(){
-              var uName= $.trim($("#userName").val());
-              var pwd=$.trim($("#userPwd").val());
+              var uName= $.trim($("#loginname").val());
+              var pwd=$.trim($("#password").val());
               if(uName!=""&&pwd!=""){
-              $.getJSON(basePath+"usersController/userLogin.do", {"LoginName":$.trim($("#userName").val()) ,"passWord":pwd, }, 
+              $.getJSON(basePath+"userAction/userLogin.do", {"loginname":uName ,"password":pwd, }, 
                 function(data){
                     if(data.success==1){
-                          window.location=basePath+"usersController/toMain.do";
+                          window.location=basePath+"jumpAction/toMain.do";
                            }
                     else{
                         alert("用户名或者密码错误");
