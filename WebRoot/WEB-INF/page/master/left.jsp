@@ -42,12 +42,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body >
-   <a href="usersController/right.do"   target="right_f">跳转测试</a>
    <c:forEach items="${sessionScope.listRote }"  var="rote">
-   <p class="father" onClick="menuClick(this);">${rote.right_name }</p>
+   <p class="father" onClick="menuClick(this);">${rote.pername }</p>
          <div>
-             <c:forEach items="${rote.listRight }" var ="roteson" >
-                  <p class="son"><a href="#" target="right_f" >${roteson.right_name}</a></p>
+             <c:forEach items="${rote.persmissionList }" var ="roteson" >
+                  <p class="son"><a href="${roteson.perurl} " target="right_f" >${roteson.pername}</a></p>
              </c:forEach>
          </div>
    </c:forEach> 

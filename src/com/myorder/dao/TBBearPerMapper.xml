@@ -19,6 +19,9 @@
     -->
     id, roleId, permissinId
   </sql>
+  <select id="selectByPermissionAndRole" parameterType="com.myorder.model.TBBearPer" resultType="java.lang.Integer">
+  select count(*) from tb_bear_per  where roleId=#{roleid} and permissinId=#{permissinid}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

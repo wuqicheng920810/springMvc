@@ -11,6 +11,10 @@
     <result column="typeName" property="typename" jdbcType="VARCHAR" />
     <result column="typeCode" property="typecode" jdbcType="VARCHAR" />
   </resultMap>
+  <!--种类查询  -->
+  <select id="selectSomeType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select * from tb_paytype where  typeCode like concat( #{code}, '%')
+  </select>
   <insert id="insert" parameterType="com.myorder.model.TBPaytype" >
     <!--
       WARNING - @mbggenerated

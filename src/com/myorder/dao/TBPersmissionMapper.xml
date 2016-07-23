@@ -20,6 +20,19 @@
     -->
     id, perName, perUrl, fatherId
   </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from tb_persmission where fatherId is not null;
+  </select>
+  
+  <!--加载功能模块  -->
+  <select id="selectFatherPermission"   resultType="com.myorder.model.TBPersmission">
+     select * from tb_persmission   where fatherId is null;
+  </select>
+  
+   <select id="selectSonPermission"  parameterType="java.lang.Integer"  resultType="com.myorder.model.TBPersmission">
+     select * from tb_persmission   where fatherId =#{id};
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     <!--
       WARNING - @mbggenerated

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.muorder.util.Logs;
+import com.muorder.util.Dictionaries;
 import com.myorder.dao.TbUserMapper;
 import com.myorder.model.TbUser;
 
@@ -30,7 +30,7 @@ public class userController {
 		TbUser user=userMapper.selectByLogin(u);
 		if(user!=null){
 			HttpSession session=request.getSession();
-			session.setAttribute(Logs.userSession, user);
+			session.setAttribute(Dictionaries.userSession, user);
 			 map.put("success", 1);
 		}
 		else{

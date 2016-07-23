@@ -1,5 +1,7 @@
 package com.myorder.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.myorder.model.TBPaytype;
@@ -21,4 +23,11 @@ public interface TBPaytypeMapper {
      * @mbggenerated Tue Jul 19 19:17:13 CST 2016
      */
     int insertSelective(TBPaytype record);
+    
+    /**
+     * 查询种类
+     * @param code
+     * @return
+     */
+     List<TBPaytype> selectSomeType(int code);
 }
