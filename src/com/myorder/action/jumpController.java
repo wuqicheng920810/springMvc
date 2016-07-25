@@ -69,9 +69,24 @@ public class jumpController {
 		   return "master/Persmission/updatePersmission";
 	   }
 
+	   //跳转到添加页面
 	   @RequestMapping("toAddBill")
 	   public ModelAndView  toAddBill( HttpServletRequest request, HttpServletResponse response){
 		   ModelAndView mav = new ModelAndView("master/Bill/addBill"); 
+		   List<TBPaytype> goodsList=  payTypeMapper.selectSomeType(Dictionaries.goodsType);
+		   List<TBPaytype>payList=payTypeMapper.selectSomeType(Dictionaries.payType);
+		   mav.addObject("goodsList", goodsList);
+		   mav.addObject("payList", payList);
+		   TBBill b=   new TBBill();
+		   b.setGoodstpye(1);
+		   mav.addObject("bill",b );
+		   return mav;
+	   }
+	   
+	   //跳转查询页面
+	   @RequestMapping("toQuertBill")
+	   public ModelAndView toQuery(){
+		   ModelAndView mav = new ModelAndView("master/Bill/showBill"); 
 		   List<TBPaytype> goodsList=  payTypeMapper.selectSomeType(Dictionaries.goodsType);
 		   List<TBPaytype>payList=payTypeMapper.selectSomeType(Dictionaries.payType);
 		   mav.addObject("goodsList", goodsList);

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.muorder.util.Dictionaries;
 import com.myorder.dao.TBBillMapper;
+import com.myorder.model.PackBill;
 import com.myorder.model.TBBill;
 import com.myorder.model.TbUser;
 
@@ -24,6 +25,14 @@ public class billController {
 	@Resource
 	private TBBillMapper billMapper;
 	
+	/**
+	 * 添加单据方法，含图片上传
+	 * @param file
+	 * @param request
+	 * @param model
+	 * @param bill
+	 * @return
+	 */
 	@RequestMapping("addBill")
 	public String addBill(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model,TBBill bill) {  
         String path = request.getSession().getServletContext().getRealPath("upload");  
@@ -50,7 +59,15 @@ public class billController {
       System.out.println(bill.toString());
       int codeId= billMapper.insert(bill);
       System.out.println("............"+codeId);
-		return "master/Bill/showBill";
+		return "redirect:/jumpAction/toQuertBill.do";
 	}
+	
+	@RequestMapping("queryBill")
+	public String queryBySome(PackBill pbill){
+		System.out.println("..............");
+		billMapper
+		return "";
+	}
+	
 
 }
