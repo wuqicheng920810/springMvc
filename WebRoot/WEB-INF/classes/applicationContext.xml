@@ -112,4 +112,22 @@
       <value>5242880</value>
     </property>
     </bean>
+    
+<!--     	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			Read-only commented out to make things easier for end-users
+			http://issues.appfuse.org/browse/APF-556
+			tx:method name="get*" read-only="true"/
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+    
+    AOP事务
+	<aop:config>
+		<aop:pointcut expression="execution(* *..dao..*(..))" id="dao-pc" />  
+    	<aop:pointcut expression="execution(* *..service.impl..*(..))" id="service-pc"/>  
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="dao-pc" order="2"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="service-pc" order="2"/>
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))||execution(* *..dao.*Dao.*(..))||execution(* *..*TaskListener.on*(..))" order="2" />
+	</aop:config> -->
 </beans>

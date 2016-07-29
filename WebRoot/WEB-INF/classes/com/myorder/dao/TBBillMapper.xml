@@ -29,26 +29,41 @@
     imageUrl
   </sql>
   
+  
+  
     <select id="selectBySome" parameterType="com.myorder.model.PackBill" resultMap="BaseResultMap">
     select * from tb_bill
     <where>
       <if test="goodsname!=null">
+        <if  test="goodsname!=''">
          goodsname=#{goodsname}
+         </if>
       </if>
        <if test="username!=null">
-         username=#{username}
+         <if test="username!=''">
+       and    username=#{username}
+         </if>
       </if>
        <if test="paytype!=null">
-         paytype=#{paytype}
+         <if test="paytype!=''">
+        and  paytype=#{paytype}
+         </if>
       </if>
        <if test="goodstpye!=null">
-         goodstpye=#{goodstpye}
+          <if test="goodstpye!=''">
+         and  goodstpye=#{goodstpye}
+          </if>
+         
       </if>
       <if test="endDate!=null">
-         endDate &lt;=#{paydate}
+         <if test="endDate!=''">
+      and   paydate &lt;=#{endDate}
+         </if>
       </if>
       <if test="beginDate!=null">
-         beginDate   &gt;=#{paydate}
+        <if test="beginDate!=''">
+       and   paydate   &gt;=#{beginDate}
+         </if>
       </if>
     </where>
   </select>

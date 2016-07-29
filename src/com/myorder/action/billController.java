@@ -1,17 +1,25 @@
 package com.myorder.action;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.muorder.util.Dictionaries;
 import com.myorder.dao.TBBillMapper;
 import com.myorder.model.PackBill;
@@ -38,7 +46,8 @@ public class billController {
         String path = request.getSession().getServletContext().getRealPath("upload");  
         TbUser user= (TbUser) request.getSession().getAttribute(Dictionaries.userSession);
         bill.setUserid(user.getId());
-        if(file!=null){
+        System.out.println("++++++++++"+file.getSize());
+        if(file!=null&&file.getSize()!=0){
         String fileName = file.getOriginalFilename();  
 //        String fileName = new Date().getTime()+".jpg";  
         System.out.println(path);  
@@ -62,12 +71,16 @@ public class billController {
 		return "redirect:/jumpAction/toQuertBill.do";
 	}
 	
-	@RequestMapping("queryBill")
-	public String queryBySome(PackBill pbill){
+	@RequestMapping("/ajax")
+	public void queryBySome(HttpServletRequest request, HttpServletResponse response,PackBill pbill) throws Exception{
 		System.out.println("..............");
-		billMapper
-		return "";
+		List<TBBill> listb=billMapper.selectBySome(pbill);
+	    
+		 Gson gson=new Gson();
+		  String s=gson.toJson(listb);
+		   System.out.println(s);
+		   response.getWriter().print(s);
 	}
-	
+
 
 }

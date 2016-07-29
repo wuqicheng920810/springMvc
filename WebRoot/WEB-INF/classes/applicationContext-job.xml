@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd 
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+
+    <bean id="TimeDate" class="com.test.test.TimeTest" />
+     
+     <!-- 指定class和方法 -->
+	<bean id="TimeBean" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="TimeDate" /><!--绑定bean  -->
+		<property name="targetMethod" value="testTime" /><!-- 指定所绑定的类里面要执行的方法 -->
+		<!-- 不允许任务并发执行 -->
+		<property name="concurrent" value="false" />
+	</bean>
+	
+	<!-- 定时任务触发器指定执行规则 -->
+	<bean id="extractReportDataCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="TimeBean" />
+		<!-- 执行规则 -->
+		<property name="cronExpression" value ="0 0/1 * * * ?" />
+	</bean>
+	
+
+
+	<!-- 线程执行器配置 - 用于任务注册 -->
+	<bean id="threadExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数  -->
+	    <property name="corePoolSize" value="10" />
+	    <!-- 最大线程数 -->
+	    <property name="maxPoolSize" value="100" />
+	    <!-- 队列最大长度 >=mainExecutor.maxSize -->
+	    <property name="queueCapacity" value="1000" />
+	    <!-- 线程池维护线程所允许的空闲时间 -->
+	    <property name="keepAliveSeconds" value="300" />
+	    <!-- 线程池对拒绝任务(无线程可用)的处理策略 -->
+	    <property name="rejectedExecutionHandler">
+	    	<bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+	    </property>
+	</bean>  
+	
+	<!-- 系统通用定时服务调度工厂 -->
+	<bean id="extractReportDataJobScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" lazy-init="false" >
+		<property name="triggers">
+			<list>
+				<!-- Server145 / NC报表WEB任务 -->
+ 				<ref bean="extractReportDataCronTrigger"/>
+<!-- 				<ref bean="postHandleTrigger" /> -->
+<!-- 				<ref bean="persistYesterdayReportTrigger" /> -->
+				<!-- Server164 / NC报表数据提取任务 -->
+<!-- 				<ref bean="extractReportDataCronTrigger" /> -->
+<!-- 				<ref bean="extractRealTimeDataMethodCronTrigger" /> -->
+				<!-- Server164 / 备件报表任务 -->
+<!-- 				<ref bean="saveDataFromHxbjJobTrigger" /> -->
+<!-- 				<ref bean="saveDailyDataFromHxbjJobTrigger" /> -->
+				<!-- 用品报表任务 -->
+<!-- 				<ref bean="extractYPDataTrigger" />  -->
+<!-- 				<ref bean="extractYPGrossProfitDataTrigger" /> -->
+<!-- 				<ref bean="saveDataFromHxypTrigger" /> -->
+<!-- 				<ref bean="saveWeekDataFromHxypTrigger" /> -->
+			</list>
+		</property>
+		<!-- 定制线程池配置 -->
+		<property name="taskExecutor" ref="threadExecutor" />
+	</bean>
+</beans>
