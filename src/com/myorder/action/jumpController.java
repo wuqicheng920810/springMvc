@@ -32,7 +32,6 @@ public class jumpController {
 	
 	@RequestMapping("toMain")
 	   public String toMain(){
-		   System.out.println("登入成功跳转");
 		   return "master/mainbody";
 	   }
 	

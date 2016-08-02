@@ -31,6 +31,7 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 <style type="text/css">
+.top_td{width: 150px}
 td {
 	width: 35%
 }
@@ -62,11 +63,13 @@ td {
 						readonly="readonly" /></td>
 				</tr>
 				<tr>
-					<td>商品类别<f:select path="paytype" items="${payList}"
-							itemLabel="typename" itemValue="id">
+					<td>商品类别<f:select path="paytype" >
+							 <f:option value="" label="请选择"/>
+                            <f:options items="${payList}" itemLabel="typename" itemValue="id" htmlEscape="false"/>
 						</f:select>
-					<td>购物方式 <f:select path="goodstpye" items="${goodsList}"
-							itemLabel="typename" itemValue="id">
+					<td>购物方式 <f:select path="goodstpye">
+							<f:option value="" label="请选择"/>
+                            <f:options items="${goodsList}" itemLabel="typename" itemValue="id" htmlEscape="false"/>
 						</f:select></td>
 				</tr>
 				<tr>
@@ -76,7 +79,19 @@ td {
 			</table>
 		</f:form>
 	</div>
-	<table class="miantable" id="miantable"></table>
+	<table border="1px" >
+	   <tr>
+	     <td   class="top_td">id</td>
+	     <td class="top_td">商品名称</td>
+	     <td class="top_td">价格</td>
+	     <td class="top_td">数量</td>
+	     <td class="top_td">购买日期</td>
+	     <td class="top_td">购买方式</td>
+	     <td class="top_td">商品类别</td>
+	     <td class="top_td">操作</td>
+	   </tr>
+	</table>
+	<table class="miantable" id="miantable" border="1px" ></table>
 	<div></div>
 </body>
 <script type="text/javascript">
@@ -100,15 +115,20 @@ td {
 				"paytype" : $("#paytype").val(),
 				"goodstpye" : $("#goodstpye").val()
 			}, function(date) {
-			alert(date.length);
 				$("#miantable").empty();
 				var context = "";
 				for ( var i = 0; i < date.length; i++) {
 					context =context+ "<tr>"
-					                +"<td>111</td>" 
+					               +"<td style='width: 150px'>"+date[i].id+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].goodsname+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].money+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].number+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].paydate+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].paytype+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].goodstpye+"</td>" 	
+					               +"<td style='width: 150px'><a href=''#''>删除</a></td>" 					                            
 					                + "</tr>"
 				}
-				alert(context);
 				$("#miantable").html(context);
 			});
 		});

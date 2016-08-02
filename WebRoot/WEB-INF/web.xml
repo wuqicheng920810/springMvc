@@ -28,13 +28,17 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-
-  
   <servlet-mapping>
     <servlet-name>spring-dispatcher</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 
-  
+  	<!-- session超时时间 -->
+ 	<session-config>
+  		<session-timeout>30</session-timeout>
+  	</session-config>
+  	<listener>
+  		<listener-class>com.test.filter.ApplicationMonitor</listener-class>
+  	</listener>
 
 </web-app>

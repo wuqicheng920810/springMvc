@@ -52,7 +52,6 @@ public class LoginFilter implements HandlerInterceptor {
 		String url= request.getRequestURI();
 		String[] geturl=url.split("/");
 		String goUrl=geturl[geturl.length-2]+"/"+geturl[geturl.length-1];
-		System.out.println(request.getSession().getAttribute(Dictionaries.userSession)+"~~~~~~~");
 		//未登入
 		if(request.getSession().getAttribute(Dictionaries.userSession)==null){
 			//如果是登入方法则放行
@@ -69,6 +68,7 @@ public class LoginFilter implements HandlerInterceptor {
 		//已登入
 		else{
 		    TbUser user=	(TbUser) request.getSession().getAttribute(Dictionaries.userSession);
+		    System.out.println("--------------------------------");
 			List<TBPersmission> listp= persmissionMapper.selectAll();
 			TBBearPer per=new TBBearPer();
 			per.setRoleid(user.getRoleid());

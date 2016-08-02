@@ -47,20 +47,7 @@
 		<property name="triggers">
 			<list>
 				<!-- Server145 / NC报表WEB任务 -->
- 				<ref bean="extractReportDataCronTrigger"/>
-<!-- 				<ref bean="postHandleTrigger" /> -->
-<!-- 				<ref bean="persistYesterdayReportTrigger" /> -->
-				<!-- Server164 / NC报表数据提取任务 -->
-<!-- 				<ref bean="extractReportDataCronTrigger" /> -->
-<!-- 				<ref bean="extractRealTimeDataMethodCronTrigger" /> -->
-				<!-- Server164 / 备件报表任务 -->
-<!-- 				<ref bean="saveDataFromHxbjJobTrigger" /> -->
-<!-- 				<ref bean="saveDailyDataFromHxbjJobTrigger" /> -->
-				<!-- 用品报表任务 -->
-<!-- 				<ref bean="extractYPDataTrigger" />  -->
-<!-- 				<ref bean="extractYPGrossProfitDataTrigger" /> -->
-<!-- 				<ref bean="saveDataFromHxypTrigger" /> -->
-<!-- 				<ref bean="saveWeekDataFromHxypTrigger" /> -->
+ 				<!-- <ref bean="extractReportDataCronTrigger"/> -->
 			</list>
 		</property>
 		<!-- 定制线程池配置 -->
