@@ -1,6 +1,7 @@
 package com.myorder.action;
 
 import java.io.File;
+import java.awt.image.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,8 @@ import com.myorder.model.TbUser;
 @Controller
 @RequestMapping("billAction")
 public class billController {
+	
+	private Map<String,Object> map=null;
 
 	@Resource
 	private TBBillMapper billMapper;
@@ -47,7 +50,7 @@ public class billController {
 			@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpServletRequest request, ModelMap model, TBBill bill) {
 		String path = request.getSession().getServletContext()
-				.getRealPath("upload");
+				.getRealPath("/..\\upload\\");
 		TbUser user = (TbUser) request.getSession().getAttribute(
 				Dictionaries.userSession);
 		bill.setUserid(user.getId());
@@ -66,10 +69,11 @@ public class billController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			model.addAttribute("fileUrl", request.getContextPath() + "/upload/"
+			model.addAttribute("fileUrl", request.getContextPath() + "/..\\upload\\"
 					+ fileName);
-			bill.setImageurl(request.getContextPath() + "/upload/" + fileName);
+			bill.setImageurl(request.getContextPath() + "/..\\upload\\" + fileName);
 		}
+		bill.setUsername(user.getUsername());
 		bill.setCreatedate(new Date());
 		System.out.println(bill.toString());
 		int codeId = billMapper.insert(bill);
@@ -77,10 +81,10 @@ public class billController {
 		return "redirect:/jumpAction/toQuertBill.do";
 	}
 
+	//  异步查询
 	@RequestMapping("/ajax")
 	public void queryBySome(HttpServletRequest request,
 			HttpServletResponse response, PackBill pbill) throws Exception {
-		System.out.println("..............");
 		response.setCharacterEncoding("utf-8");
 		List<TBBill> listb = billMapper.selectBySome(pbill);
 		Gson gson = new Gson();
@@ -89,4 +93,20 @@ public class billController {
 		response.getWriter().print(s);
 	}
 
+	//删除单条记录
+	@RequestMapping("deleteBill")
+	public void  deleteBill(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		int id= billMapper.deleteByPrimaryKey(Integer.parseInt(request.getParameter("id").toString()));
+		map=new HashMap<String,Object>();
+		if(id==1){
+			map.put("falg", 1);
+		}
+		else{
+			map.put("falg", 0);
+		}
+		Gson gson = new Gson();
+		String s = gson.toJson(map);
+		System.out.println(s);
+		response.getWriter().print(s);
+	}
 }

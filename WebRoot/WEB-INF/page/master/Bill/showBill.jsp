@@ -73,7 +73,7 @@ td {
 						</f:select></td>
 				</tr>
 				<tr>
-					<td><input type="button" value="提交" id="from_but" />
+					<td><input type="button"  value="提交" id="from_but" />
 					</td>
 				</tr>
 			</table>
@@ -88,7 +88,9 @@ td {
 	     <td class="top_td">购买日期</td>
 	     <td class="top_td">购买方式</td>
 	     <td class="top_td">商品类别</td>
+	     <td class="top_td">图片</td>
 	     <td class="top_td">操作</td>
+	    
 	   </tr>
 	</table>
 	<table class="miantable" id="miantable" border="1px" ></table>
@@ -126,13 +128,54 @@ td {
 					               +"<td style='width: 150px'>"+date[i].paydate+"</td>" 
 					               +"<td style='width: 150px'>"+date[i].paytype+"</td>" 
 					               +"<td style='width: 150px'>"+date[i].goodstpye+"</td>" 	
-					               +"<td style='width: 150px'><a href=''#''>删除</a></td>" 					                            
+					               +"<td style='width: 150px'><a href="+date[i].imageurl+" target='view_window' >查看图片</a></td>" 	
+					               +"<td style='width: 150px'><input type='button'  value='删除' onclick='deleteOne("+date[i].id+")'  id='delete' /></td>" 					                            
 					                + "</tr>"
 				}
 				$("#miantable").html(context);
 			});
 		});
-
 	})
+	function deleteOne( a){
+	if(confirm("确定要删除吗？")){
+		$.getJSON(page.basePath + "billAction/deleteBill.do", {
+				"id" : a,
+			}, function(date) {
+			if(date.falg==1){
+			     alert("删除成功");
+			     $.getJSON(page.basePath + "billAction/ajax.do", {
+				"goodsname" : $("#goodsname").val(),
+				"username" : $("#username").val(),
+				"beginDate" : $("#beginDate").val(),
+				"endDate" : $("#endDate").val(),
+				"paytype" : $("#paytype").val(),
+				"goodstpye" : $("#goodstpye").val()
+			}, function(date) {
+				$("#miantable").empty();
+				var context = "";
+				for ( var i = 0; i < date.length; i++) {
+					context =context+ "<tr>"
+					               +"<td style='width: 150px'>"+date[i].id+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].goodsname+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].money+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].number+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].paydate+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].paytype+"</td>" 
+					               +"<td style='width: 150px'>"+date[i].goodstpye+"</td>" 	
+					               +"<td style='width: 150px'><a href="+date[i].imageurl+" target='view_window' >查看图片</a></td>" 	
+					               +"<td style='width: 150px'><input type='button'  value='删除' onclick='deleteOne("+date[i].id+")'  id='delete' /></td>" 					                            
+					                + "</tr>"
+				}
+				$("#miantable").html(context);
+			});
+			  }
+			  else{
+			  alert("删除失败")}
+			});
+			}
+			else{
+			return false;
+			}
+		}
 </script>
 </html>
