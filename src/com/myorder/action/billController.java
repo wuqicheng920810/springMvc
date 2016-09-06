@@ -109,4 +109,27 @@ public class billController {
 		System.out.println(s);
 		response.getWriter().print(s);
 	}
+	
+	@RequestMapping("/ajaxs")  
+	@ResponseBody  
+	public void ajax(HttpServletRequest request,HttpServletResponse response){  
+	    List<String> list=new ArrayList<String>();  
+	    System.out.println("USER="+request.getParameter("username"));
+	    list.add("abc");  
+        list.add("fts");  
+	    list.add("ccc");  
+	    list.add("ddd");  
+	    list.add("eee");  
+	    list.add("fff");  
+	    list.add("ggg");  
+	    list.add("hhhh");  
+	    list.add("www");  
+	    System.out.println(list.toString());
+	    try {
+			response.getWriter().print(list.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

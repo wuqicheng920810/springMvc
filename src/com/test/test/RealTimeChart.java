@@ -1,4 +1,4 @@
-package com.test.test;
+/*package com.test.test;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -59,3 +59,4 @@ public class RealTimeChart extends ChartPanel implements Runnable
       
 }
 
+*/
